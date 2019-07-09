@@ -14,8 +14,9 @@ import ElementUI from 'element-ui'
  */
 import i18n from './i18n'
 
-Vue.use(ElementUI, { size: 'mini', i18n: (key, value) => i18n.t(key, value) })
+import './styles'
 
+Vue.use(ElementUI, { size: 'mini', i18n: (key, value) => i18n.t(key, value) })
 Vue.config.productionTip = false
 
 new Vue({
