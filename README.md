@@ -47,11 +47,14 @@ https://segmentfault.com/a/1190000006110417
 ### **组件集成**
 - Element 组件库集成
 - Element Table 及 Form 组件二次封装
-### **第三方封装组件**
+### **第三方组件组件**
 - 富文本编辑器
 - Markdown 编辑器
 - Codemirror 编辑器
 - others
+### **高级功能**
+- 表单设计器
+- 工作流引擎（需要后端开发人员配合）
 ### **Mock.JS 请求拦截**
 - 以 mock.js 为模拟数据，提供前端请求数据
 ```
