@@ -637,7 +637,7 @@
     background-color: #FFFFFF;
     background-image: none;
     border: 1px solid #DCDFE6;
-    border-radius: 4px;
+    border-radius: 2px;
     -webkit-transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
     transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1); }
     .el-textarea__inner::-webkit-input-placeholder {
@@ -726,7 +726,7 @@
     -webkit-appearance: none;
     background-color: #FFFFFF;
     background-image: none;
-    border-radius: 4px;
+    border-radius: 2px;
     border: 1px solid #DCDFE6;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -853,7 +853,7 @@
     display: table-cell;
     position: relative;
     border: 1px solid #DCDFE6;
-    border-radius: 4px;
+    border-radius: 2px;
     padding: 0 20px;
     width: 1px;
     white-space: nowrap; }
@@ -935,11 +935,11 @@
       cursor: not-allowed; }
   .el-input-number__increase {
     right: 1px;
-    border-radius: 0 4px 4px 0;
+    border-radius: 0 2px 2px 0;
     border-left: 1px solid #DCDFE6; }
   .el-input-number__decrease {
     left: 1px;
-    border-radius: 4px 0 0 4px;
+    border-radius: 2px 0 0 2px;
     border-right: 1px solid #DCDFE6; }
   .el-input-number.is-disabled .el-input-number__increase, .el-input-number.is-disabled .el-input-number__decrease {
     border-color: #E4E7ED;
@@ -993,7 +993,7 @@
       -webkit-transform: scale(0.8);
       transform: scale(0.8); }
   .el-input-number.is-controls-right .el-input-number__increase {
-    border-radius: 0 4px 0 0;
+    border-radius: 0 2px 0 0;
     border-bottom: 1px solid #DCDFE6; }
   .el-input-number.is-controls-right .el-input-number__decrease {
     right: 1px;
@@ -1002,7 +1002,7 @@
     left: auto;
     border-right: none;
     border-left: 1px solid #DCDFE6;
-    border-radius: 0 0 4px 0; }
+    border-radius: 0 0 2px 0; }
   .el-input-number.is-controls-right[class*=medium] [class*=increase], .el-input-number.is-controls-right[class*=medium] [class*=decrease] {
     line-height: 17px; }
   .el-input-number.is-controls-right[class*=small] [class*=increase], .el-input-number.is-controls-right[class*=small] [class*=decrease] {
@@ -1641,10 +1641,10 @@
       .el-slider.is-vertical.el-slider--with-input .el-slider__input .el-input-number__decrease {
         width: 18px;
         right: 18px;
-        border-bottom-left-radius: 4px; }
+        border-bottom-left-radius: 2px; }
       .el-slider.is-vertical.el-slider--with-input .el-slider__input .el-input-number__increase {
         width: 19px;
-        border-bottom-right-radius: 4px; }
+        border-bottom-right-radius: 2px; }
         .el-slider.is-vertical.el-slider--with-input .el-slider__input .el-input-number__increase ~ .el-input .el-input__inner {
           border-bottom-left-radius: 0;
           border-bottom-right-radius: 0; }
