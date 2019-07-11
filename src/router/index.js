@@ -34,8 +34,9 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   console.log(to)
-  if (to.path === '/') next({ name: 'Login' })
-  else next()
+  // if (to.path === '/') next({ name: 'Login' })
+  // else next()
+  next()
 })
 
 export default router

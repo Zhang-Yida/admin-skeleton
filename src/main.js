@@ -14,6 +14,11 @@ import ElementUI from 'element-ui'
  */
 import i18n from './i18n'
 
+import '@/components'
+
+/**
+ * 全局样式引入
+ */
 import './styles'
 
 Vue.use(ElementUI, { size: 'mini', i18n: (key, value) => i18n.t(key, value) })
