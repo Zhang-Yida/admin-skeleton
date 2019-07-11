@@ -28,14 +28,15 @@ export default {
   },
   mounted () {
     console.log('Home Mounted')
+    this.$axios.post('/', { name: 'zm' })
   }
 }
 </script>
 <style lang="less" scoped>
 .sk-container{
   height: 100%;
-.sk-header{
-background: #eee;
-}
+  .sk-header{
+  background: #eee;
+  }
 }
 </style>

@@ -15,18 +15,15 @@ export default [
     children: [
       {
         path: '/system/menu/list',
-        title: 'system.menu.list',
-        icon: 'el-icon-setting'
+        title: 'system.menu.listlistlistlistlistlist'
       },
       {
         path: '/system/dictionary/list',
-        title: 'abc',
-        icon: 'el-icon-watermelon'
+        title: 'abc'
       },
       {
         path: '/system/user/list',
-        title: 'system.user.list',
-        icon: 'icon-tree'
+        title: 'system.user.list'
       }
     ]
   },

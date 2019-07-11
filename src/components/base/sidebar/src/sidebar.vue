@@ -46,19 +46,22 @@ export default {
     },
 
     getMenuTitle (title) {
-      return <span> { title } </span>
+      return <span> {title} </span>
     }
   },
   // 通过 render 函数，实现组件
   render (h) {
     let { menuList, isCollapse, getItem } = this
     return (
-      <el-menu class="sk-menu" unique-opened collapse={isCollapse}>
-        {
-          menuList.map(menuItem => {
-            return getItem(menuItem)
-          })
-        }
+      <el-menu
+        class="sk-menu"
+        unique-opened
+        collapse={isCollapse}
+        router={true}
+      >
+        {menuList.map(menuItem => {
+          return getItem(menuItem)
+        })}
       </el-menu>
     )
   }

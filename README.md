@@ -33,7 +33,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ### **基础功能**
 - 工程基础布局
 - Vue-router 路由集成
-- Vue-store 全局状态管理
+- Vuex 全局状态管理
 - Axios 集成
 - iconfont 第三方图标库集成
 - i18n 多语言维护
@@ -67,3 +67,11 @@ http://mockjs.com/
 - 前端兼容性
 - 服务器自动部署脚本
 - Vscode 插件选择及配置
+
+## 3. 学习路径及进阶
+
+伴随着前端工程的开发，其中部分知识点的深究文档也会陆续写出，来完善个人的前端盲点，这是个持续性的维护，也希望自己能够坚持下来
+
+### **axios 源码解析及应用**
+
+### **总结并集成常用的 js 方法**
