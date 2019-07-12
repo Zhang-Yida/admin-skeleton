@@ -23,12 +23,9 @@ export default {
       menuList: menuList
     }
   },
-  created () {
-    console.log('Home Created')
-  },
+  created () { },
   mounted () {
-    console.log('Home Mounted')
-    this.$axios.post('/', { name: 'zm' })
+    // this.$axios.post('/', { name: 'zm' })
   }
 }
 </script>

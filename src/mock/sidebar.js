@@ -14,7 +14,7 @@ export default [
     icon: 'el-icon-setting',
     children: [
       {
-        path: '/system/menu/list',
+        path: '/table',
         title: 'system.menu.listlistlistlistlistlist'
       },
       {

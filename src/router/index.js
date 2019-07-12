@@ -3,7 +3,6 @@ import Router from 'vue-router'
 
 import Login from '@/views/login'
 import Home from '@/views/home'
-import Dashboard from '@/views/dashboard'
 
 Vue.use(Router)
 
@@ -25,7 +24,12 @@ const router = new Router({
         {
           path: '',
           name: 'Dashboard',
-          component: Dashboard
+          component: _ => import('@/views/dashboard')
+        },
+        {
+          path: 'table',
+          name: 'Table',
+          component: _ => import('@/views/demo/table')
         }
       ]
     }
@@ -33,7 +37,7 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log(to)
+  // console.log(to)
   // if (to.path === '/') next({ name: 'Login' })
   // else next()
   next()
