@@ -3,7 +3,24 @@
     :table-columns="tableColumns"
     :table-data="tableData"
     :table-attrs="tableAttrs"
-  />
+  >
+    <template
+      slot="hello"
+      slot-scope="scope"
+    >
+      <el-link type="primary">
+        {{ scope.row.label }}
+      </el-link>
+    </template>
+    <template
+      slot="testchild1"
+      slot-scope="scope"
+    >
+      <el-link type="primary">
+        {{ scope.row.label }}
+      </el-link>
+    </template>
+  </simple-table>
 </template>
 <script>
 export default {
@@ -24,8 +41,16 @@ export default {
           prop: 'label',
           width: '200',
           formatter: (row, column, cellValue, index) => {
+            // 字典翻译或其它对值的处理
             return cellValue
-          }
+          },
+          slotname: 'label'
+        },
+        {
+          label: 'hello',
+          prop: 'hello',
+          width: '200',
+          slotname: 'hello'
         },
         {
           label: 'test',
@@ -39,7 +64,8 @@ export default {
               children: [
                 {
                   label: 'test-2-child-1',
-                  prop: 'testchild1'
+                  prop: 'testchild1',
+                  slotname: 'testchild1'
                 },
                 {
                   label: 'test-2-child-2',

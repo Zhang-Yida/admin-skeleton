@@ -1,7 +1,7 @@
 <template>
   <div class="sk-table">
     <div class="sk-search">
-      123
+      Search Condition Placeholder
     </div>
     <el-table
       :data="tableData"
@@ -12,6 +12,7 @@
         v-for="(tableColumnItem, tableColumnIndex) in tableColumns"
         :key="tableColumnIndex"
         :column-attrs="tableColumnItem"
+        :slot-list="$scopedSlots"
       />
     </el-table>
     <div
@@ -44,6 +45,9 @@ export default {
      * false 无
      */
     withPagination: { type: Boolean, default: true }
+  },
+  mounted () {
+    console.log(this.$scopedSlots)
   },
   methods: {
   }
