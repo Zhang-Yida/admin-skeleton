@@ -15,11 +15,11 @@ export default [
     children: [
       {
         path: '/table',
-        title: 'system.menu.listlistlistlistlistlist'
+        title: 'Simple Table Demo'
       },
       {
-        path: '/system/dictionary/list',
-        title: 'abc'
+        path: '/form',
+        title: 'Simple Form Demo'
       },
       {
         path: '/system/user/list',
