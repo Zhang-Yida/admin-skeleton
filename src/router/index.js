@@ -30,6 +30,11 @@ const router = new Router({
           path: 'table',
           name: 'Table',
           component: _ => import('@/views/demo/table')
+        },
+        {
+          path: 'form',
+          name: 'Form',
+          component: _ => import('@/views/demo/form')
         }
       ]
     }

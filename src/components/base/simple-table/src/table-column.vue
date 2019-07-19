@@ -2,10 +2,15 @@
 export default {
   name: 'SimpleTableColumn',
   props: {
-    columnAttrs: { type: Object, required: true }
+    columnAttrs: { type: Object, required: true },
+    // 用于接受父组件提供的 slot 对象列表
+    slotList: { type: Object, default: () => { return {} } }
   },
   data () {
     return {}
+  },
+  mounted () {
+    console.log(this.slotList)
   },
   methods: {
     getColumn (columnAttrs) {
@@ -20,7 +25,17 @@ export default {
           </el-table-column>
         )
       } else {
-        return <el-table-column attrs={columnAttrs} />
+        if (columnAttrs.slotname) {
+          return (
+            <el-table-column attrs={columnAttrs}>
+              {
+                this.slotList[columnAttrs.slotname]
+              }
+            </el-table-column>
+          )
+        } else {
+          return <el-table-column attrs={columnAttrs} />
+        }
       }
     }
   },

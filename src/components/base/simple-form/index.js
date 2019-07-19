@@ -1,3 +1,3 @@
-import SimpleForm from './src/simple-form'
+import SimpleForm from './src/form'
 
 export default SimpleForm
