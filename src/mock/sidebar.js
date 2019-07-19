@@ -10,12 +10,12 @@ export default [
   },
   {
     path: '/system',
-    title: 'system.main',
+    title: 'Components',
     icon: 'el-icon-setting',
     children: [
       {
         path: '/table',
-        title: 'system.menu.listlistlistlistlistlist'
+        title: 'Simple Table'
       },
       {
         path: '/system/dictionary/list',
