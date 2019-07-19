@@ -17,7 +17,6 @@
         </el-form-item>
       </el-col>
     </el-row>
-    <el-button @click="handleTest" />
   </el-form>
 </template>
 <script>
@@ -29,19 +28,8 @@ export default {
      * 设置 form 显示布局及基础属性
      */
     formLayout: { type: Object, default: () => {} },
-    widgetList: { type: Array, required: true }
-  },
-  data () {
-    return {
-      model: {
-        baseInput: 'zhangmeng',
-        disabledInput: 'disabled',
-        clearableInput: 'clearable',
-        passwordInput: 'password',
-        iconInput: '',
-        textareaInput: ''
-      }
-    }
+    widgetList: { type: Array, required: true },
+    model: { type: Object, required: true }
   },
   computed: {
     mergedFormLayout () {

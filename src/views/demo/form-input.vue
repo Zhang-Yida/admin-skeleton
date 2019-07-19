@@ -1,10 +1,21 @@
 <template>
-  <simple-form :widget-list="widgetList" />
+  <simple-form
+    :widget-list="widgetList"
+    :model="model"
+  />
 </template>
 <script>
 export default {
   data () {
     return {
+      model: {
+        baseInput: 'zhangmeng',
+        disabledInput: 'disabled',
+        clearableInput: 'clearable',
+        passwordInput: 'password',
+        iconInput: '',
+        textareaInput: ''
+      },
       widgetList: [
         // 普通输入框
         {
@@ -25,11 +36,25 @@ export default {
         },
         // with clearable
         {
-          label: 'with disabled',
+          label: 'with clearable',
           type: 'el-input',
           component: {
             prop: 'clearableInput',
             clearable: true
+          }
+        },
+        // with clearable and clear event
+        {
+          label: 'with clearable and clear event',
+          type: 'el-input',
+          component: {
+            prop: 'clearableInput',
+            clearable: true
+          },
+          event: {
+            clear: () => {
+              console.log(`clear event trigger!`)
+            }
           }
         },
         // with show-password

@@ -18,8 +18,12 @@ export default [
         title: 'Simple Table Demo'
       },
       {
-        path: '/form',
-        title: 'Simple Form Demo'
+        path: '/form-input',
+        title: 'Simple Form Input'
+      },
+      {
+        path: '/form-select',
+        title: 'Simple Form Select'
       }
     ]
   },

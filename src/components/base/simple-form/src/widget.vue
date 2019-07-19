@@ -4,11 +4,14 @@
     v-model="currentModel"
     class="sk-widget"
     v-bind="option.component"
+    v-on="option.event"
   >
     <template v-if="hasChildrenComponents">
       <el-option
         v-for="(optionItem, optionIdx) in option.option"
         :key="optionIdx"
+        :value="optionItem.value"
+        :label="optionItem.label"
       />
     </template>
   </component>

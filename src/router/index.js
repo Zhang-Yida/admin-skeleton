@@ -32,9 +32,14 @@ const router = new Router({
           component: _ => import('@/views/demo/table')
         },
         {
-          path: 'form',
-          name: 'Form',
-          component: _ => import('@/views/demo/form')
+          path: 'form-input',
+          name: 'FormInput',
+          component: _ => import('@/views/demo/form-input')
+        },
+        {
+          path: 'form-select',
+          name: 'FormSelect',
+          component: _ => import('@/views/demo/form-select')
         }
       ]
     }
