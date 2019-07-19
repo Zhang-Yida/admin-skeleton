@@ -1,6 +1,4 @@
-function isArray () {
-
-}
+function isArray () {}
 
 function bind (fn, thisArg) {
   return function wrap () {
@@ -11,40 +9,32 @@ function bind (fn, thisArg) {
     return fn.apply(thisArg, args)
   }
 }
+function isObject (value) {
+  const type = typeof value
+  return value !== null && (type === 'object' || type === 'function')
+}
 
-// function Util (conf) {
-//   this.conf = conf
-// }
-
-// Util.prototype.request = function request () {
-//   console.log('property test')
-// }
-
-// function createInstance (defaultConf) {
-//   let context = new Util(defaultConf)
-//   let instance = bind(Util.prototype.request, context)
-//   return instance
-// }
-
-// let init = function init () {
-//   return createInstance({ name: 'zm' })
-// }
-
-// let axios = init()
-// axios()
-// let a = [function caseA () {
-//   console.log('case a')
-// }, function caseB () {
-//   console.log('case b')
-// }]
-// // Promise Testing Case
-// let promise = Promise.resolve({ name: 'zm' })
-// promise.then(a.shift(), rej => {
-//   console.log(rej)
-// })
-// console.log(a)
-
+// { a: [{ b: 2 }] } { a: [{ c: 2 }]} -> { a: [{b:2}, {c:2}]}
+// merge({o: {a: 3}}, {o: {b:4}}) => {o: {a:3, b:4}}
+function merge (source, other) {
+  if (!isObject(source) || !isObject(other)) {
+    return other === undefined ? source : other
+  }
+  return Object.keys({
+    ...source,
+    ...other
+  }).reduce(
+    (acc, key) => {
+      // 递归合并 value
+      acc[key] = merge(source[key], other[key])
+      return acc
+    },
+    Array.isArray(source) ? [] : {}
+  )
+}
 export default {
   isArray,
-  bind
+  isObject,
+  bind,
+  merge
 }

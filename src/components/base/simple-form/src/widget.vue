@@ -1,12 +1,16 @@
 <template>
   <component
     :is="option.type"
-    v-model="option.prop"
+    v-model="currentModel"
+    class="sk-widget"
+    v-bind="option.component"
   >
-    <el-option
-      v-for="(optionItem, optionIdx) in option.option"
-      :key="optionIdx"
-    />
+    <template v-if="hasChildrenComponents">
+      <el-option
+        v-for="(optionItem, optionIdx) in option.option"
+        :key="optionIdx"
+      />
+    </template>
   </component>
 </template>
 
@@ -14,10 +18,28 @@
 export default {
   name: 'WidgetItem',
   props: {
-    option: { type: Object, required: true }
+    // 用于渲染组件的组件属性
+    option: { type: Object, required: true },
+    model: { type: [Array, String, Number, Object], required: true }
+  },
+  computed: {
+    currentModel: {
+      set: function (data) {
+        this.$emit('update:model', data)
+      },
+      get: function () {
+        return this.model
+      }
+    },
+
+    hasChildrenComponents () {
+      return this.option.type === 'el-select'
+    }
   }
 }
 </script>
 <style lang="less" scoped>
-
+.sk-widget {
+  width: 100%;
+}
 </style>
