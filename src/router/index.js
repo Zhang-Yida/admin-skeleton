@@ -7,7 +7,7 @@ import Home from '@/views/home'
 Vue.use(Router)
 
 const router = new Router({
-  mode: 'history',
+  // mode: 'history',
   base: process.env.BASE_URL,
   scrollBehavior: () => { return { y: 0 } },
   routes: [
@@ -30,6 +30,11 @@ const router = new Router({
           path: 'table',
           name: 'Table',
           component: _ => import('@/views/demo/table')
+        },
+        {
+          path: 'tableWithCopycell',
+          name: 'TableWithCopycell',
+          component: _ => import('@/views/demo/table-with-copycell')
         },
         {
           path: 'form-input',

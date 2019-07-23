@@ -1,14 +1,14 @@
 <template>
   <component
-    :is="option.type"
+    :is="currentOption.type"
     v-model="currentModel"
     class="sk-widget"
-    v-bind="option.component"
-    v-on="option.event"
+    v-bind="currentOption.component"
+    v-on="currentOption.event"
   >
     <template v-if="hasChildrenComponents">
       <el-option
-        v-for="(optionItem, optionIdx) in option.option"
+        v-for="(optionItem, optionIdx) in currentOption.option"
         :key="optionIdx"
         :value="optionItem.value"
         :label="optionItem.label"
@@ -23,7 +23,7 @@ export default {
   props: {
     // 用于渲染组件的组件属性
     option: { type: Object, required: true },
-    model: { type: [Array, String, Number, Object], required: true }
+    model: { type: [Array, String, Number, Object] }
   },
   computed: {
     currentModel: {
@@ -32,6 +32,13 @@ export default {
       },
       get: function () {
         return this.model
+      }
+    },
+
+    currentOption () {
+      if (this.option.editable) return this.option
+      else {
+        return this.$utils.merge(this.option, { type: 'sk-label' })
       }
     },
 

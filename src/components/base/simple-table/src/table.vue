@@ -4,9 +4,11 @@
       Search Condition Placeholder
     </div>
     <el-table
+      ref="simpleTableWrapper"
       :data="tableData"
       v-bind="tableAttrs"
       height="auto"
+      @cell-dblclick="handleCellDblclick"
     >
       <simple-table-column
         v-for="(tableColumnItem, tableColumnIndex) in tableColumns"
@@ -28,7 +30,6 @@
   </div>
 </template>
 <script>
-// import defaultAttrs from './default-attrs'
 export default {
   name: 'SimpleTable',
   props: {
@@ -46,10 +47,41 @@ export default {
      */
     withPagination: { type: Boolean, default: true }
   },
+  computed: {
+    simpleTableWrapper () { return this.$refs.simpleTableWrapper }
+  },
   mounted () {
-    console.log(this.$scopedSlots)
+    // console.log(this.$scopedSlots)
+    // 监听用户粘贴事件
+    // window.addEventListener('paste', (event) => {
+    //   // 阻止默认粘贴事件
+    //   event.preventDefault()
+    //   let pasteDataStr = event.clipboardData.getData('Text')
+    //   console.log(pasteDataStr)
+    //   debugger
+    //   // debugger
+    // }, false)
   },
   methods: {
+    handleCellDblclick (row, column, cell, event) {
+      this.$emit('cell-dblclick', arguments)
+      console.log(cell)
+      this.bindEvents(cell)
+    },
+
+    bindEvents (dom) {
+      dom.addEventListener('paste', this.pasteData, { passive: false })
+    },
+    unbindEvents () {
+      this.simpleTableWrapper.removeEventListener('paste', this.pasteData, { passive: false })
+    },
+
+    pasteData (event) {
+      event.preventDefault()
+      // 用于兼容 IE
+      let clipboardData = event.clipboardData || window.clipboardData
+      console.log(clipboardData.getData('Text'))
+    }
   }
 }
 </script>

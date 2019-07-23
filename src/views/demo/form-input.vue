@@ -21,16 +21,15 @@ export default {
         {
           label: 'normal',
           type: 'el-input',
-          component: {
-            prop: 'baseInput'
-          }
+          prop: 'baseInput'
+          // component: {}
         },
         // with disabled
         {
           label: 'with disabled',
           type: 'el-input',
+          prop: 'disabledInput',
           component: {
-            prop: 'disabledInput',
             disabled: true
           }
         },
@@ -38,8 +37,8 @@ export default {
         {
           label: 'with clearable',
           type: 'el-input',
+          prop: 'clearableInput',
           component: {
-            prop: 'clearableInput',
             clearable: true
           }
         },
@@ -47,8 +46,8 @@ export default {
         {
           label: 'with clearable and clear event',
           type: 'el-input',
+          prop: 'clearableInput',
           component: {
-            prop: 'clearableInput',
             clearable: true
           },
           event: {
@@ -61,8 +60,8 @@ export default {
         {
           label: 'with disabled',
           type: 'el-input',
+          prop: 'passwordInput',
           component: {
-            prop: 'passwordInput',
             showPassword: true
           }
         },
@@ -70,8 +69,8 @@ export default {
         {
           label: 'with suffix-icon',
           type: 'el-input',
+          prop: 'iconInput',
           component: {
-            prop: 'iconInput',
             suffixIcon: 'el-icon-date',
             prefixIcon: 'el-icon-search'
           }
@@ -80,8 +79,8 @@ export default {
         {
           label: 'textarea',
           type: 'el-input',
+          prop: 'textareaInput',
           component: {
-            prop: 'textareaInput',
             type: 'textarea',
             rows: 5
           }
@@ -90,8 +89,8 @@ export default {
         {
           label: 'textarea (with autosize)',
           type: 'el-input',
+          prop: 'textareaInput',
           component: {
-            prop: 'textareaInput',
             type: 'textarea',
             autosize: { minRows: 2, maxRows: 4 }
           }

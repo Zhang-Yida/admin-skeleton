@@ -1,3 +1,8 @@
 module.exports = {
-  publicPath: './'
+  publicPath: './',
+  transpileDependencies: [
+    'vue-echarts',
+    'resize-detector',
+    'element-ui/src/utils/clickoutside'
+  ]
 }

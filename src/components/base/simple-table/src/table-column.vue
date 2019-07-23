@@ -6,12 +6,6 @@ export default {
     // 用于接受父组件提供的 slot 对象列表
     slotList: { type: Object, default: () => { return {} } }
   },
-  data () {
-    return {}
-  },
-  mounted () {
-    console.log(this.slotList)
-  },
   methods: {
     getColumn (columnAttrs) {
       if (columnAttrs.children && columnAttrs.children.length > 0) {

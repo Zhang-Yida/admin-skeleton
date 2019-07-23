@@ -11,7 +11,7 @@
       >
         <el-form-item :label="widget.label">
           <widget-item
-            :model.sync="model[widget.component.prop]"
+            :model.sync="model[widget.prop]"
             :option="widget"
           />
         </el-form-item>
