@@ -36,9 +36,12 @@ export default {
     },
 
     currentOption () {
-      if (this.option.editable) return this.option
-      else {
+      console.log(this.option)
+      // 判断该组件是否为只读
+      if ((typeof (this.option.editable) === 'boolean') && !this.option.editable) {
         return this.$utils.merge(this.option, { type: 'sk-label' })
+      } else {
+        return this.option
       }
     },
 

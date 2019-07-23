@@ -51,22 +51,11 @@ export default {
     simpleTableWrapper () { return this.$refs.simpleTableWrapper }
   },
   mounted () {
-    // console.log(this.$scopedSlots)
-    // 监听用户粘贴事件
-    // window.addEventListener('paste', (event) => {
-    //   // 阻止默认粘贴事件
-    //   event.preventDefault()
-    //   let pasteDataStr = event.clipboardData.getData('Text')
-    //   console.log(pasteDataStr)
-    //   debugger
-    //   // debugger
-    // }, false)
   },
   methods: {
     handleCellDblclick (row, column, cell, event) {
-      this.$emit('cell-dblclick', arguments)
-      console.log(cell)
-      this.bindEvents(cell)
+      this.$emit('cell-dblclick', row, column, cell, event)
+      // this.bindEvents(cell)
     },
 
     bindEvents (dom) {

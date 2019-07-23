@@ -5,24 +5,18 @@
     :table-attrs="tableAttrs"
     @cell-dblclick="handleCellDblclick"
   >
-    <template
-      slot="name"
-      slot-scope="scope"
-    >
+    <template #name="slotProps">
       <widget-item
-        :model.sync="scope.row.name"
+        :model.sync="slotProps.row.name"
         :option="{
           type: 'el-input',
-          editable: false
+          editable: !!slotProps.row.__editable
         }"
       />
     </template>
-    <template
-      slot="hello"
-      slot-scope="scope"
-    >
+    <template #hello="slotProps">
       <el-link type="primary">
-        {{ scope.row.label }}
+        {{ slotProps.row.label }}
       </el-link>
     </template>
   </simple-table>
@@ -97,7 +91,6 @@ export default {
           testChild: '___'
         }
       ],
-
       tableAttrs: {
         border: true
       }
@@ -105,7 +98,8 @@ export default {
   },
   methods: {
     handleCellDblclick (row, column, cell, event) {
-      console.log(arguments)
+      // row.__editable = true
+      this.$set(row, '__editable', !row.__editable)
     },
     handelCellClickoutside () {
       console.log('click outside')
