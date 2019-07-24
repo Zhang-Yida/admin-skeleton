@@ -27,17 +27,15 @@ export default {
         {
           label: 'normal',
           type: 'el-select',
-          component: {
-            prop: 'baseSelect'
-          },
+          prop: 'baseSelect',
           option: optionList
         },
         // 可清空单选
         {
           label: 'normal',
           type: 'el-select',
+          prop: 'baseSelect',
           component: {
-            prop: 'baseSelect',
             clearable: true
           },
           option: optionList
@@ -46,8 +44,8 @@ export default {
         {
           label: '基础多选',
           type: 'el-select',
+          prop: 'baseMulSelect',
           component: {
-            prop: 'baseMulSelect',
             multiple: true
           },
           option: optionList
@@ -55,8 +53,8 @@ export default {
         {
           label: '基础多选 with collapse-tags',
           type: 'el-select',
+          prop: 'baseMulSelect',
           component: {
-            prop: 'baseMulSelect',
             multiple: true,
             collapseTags: true
           },

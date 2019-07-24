@@ -8,16 +8,18 @@
     <template #name="slotProps">
       <widget-item
         :model.sync="slotProps.row.name"
-        :option="{
-          type: 'el-input',
-          editable: !!slotProps.row.__editable
-        }"
+        :option="{ type: 'el-input' }"
+        :editable="true"
+        :editmode="false"
       />
     </template>
     <template #hello="slotProps">
-      <el-link type="primary">
-        {{ slotProps.row.label }}
-      </el-link>
+      <widget-item
+        :model.sync="slotProps.row.hello"
+        :option="{ type: 'el-select', option: selectOption, component: { 'automatic-dropdown': true } }"
+        :editable="true"
+        :editmode="false"
+      />
     </template>
   </simple-table>
 </template>
@@ -93,13 +95,24 @@ export default {
       ],
       tableAttrs: {
         border: true
-      }
+      },
+
+      selectOption: [
+        {
+          value: 'base',
+          label: 'Base Select'
+        },
+        {
+          value: 'advance',
+          label: 'Adv Select'
+        }
+      ]
     }
   },
   methods: {
     handleCellDblclick (row, column, cell, event) {
       // row.__editable = true
-      this.$set(row, '__editable', !row.__editable)
+      // this.$set(row, '__editable', !row.__editable)
     },
     handelCellClickoutside () {
       console.log('click outside')

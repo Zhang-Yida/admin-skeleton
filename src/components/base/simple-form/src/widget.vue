@@ -1,29 +1,53 @@
 <template>
-  <component
-    :is="currentOption.type"
-    v-model="currentModel"
-    class="sk-widget"
-    v-bind="currentOption.component"
-    v-on="currentOption.event"
+  <div
+    v-clickoutside="handleClickoutside"
+    @click="handleWidgetClick"
   >
-    <template v-if="hasChildrenComponents">
-      <el-option
-        v-for="(optionItem, optionIdx) in currentOption.option"
-        :key="optionIdx"
-        :value="optionItem.value"
-        :label="optionItem.label"
-      />
-    </template>
-  </component>
+    <component
+      :is="currentOption.type"
+      ref="widget"
+      v-model="currentModel"
+      class="sk-widget"
+      v-bind="currentOption.component"
+      v-on="currentOption.event"
+    >
+      <template v-if="hasChildrenComponents">
+        <el-option
+          v-for="(optionItem, optionIdx) in currentOption.option"
+          :key="optionIdx"
+          :value="optionItem.value"
+          :label="optionItem.label"
+        />
+      </template>
+    </component>
+  </div>
 </template>
 
 <script>
+import Clickoutside from 'element-ui/src/utils/clickoutside'
 export default {
   name: 'WidgetItem',
+  directives: { Clickoutside },
   props: {
     // 用于渲染组件的组件属性
     option: { type: Object, required: true },
-    model: { type: [Array, String, Number, Object] }
+    model: { type: [Array, String, Number, Object] },
+    /**
+     * 该组件是否为可编辑组件
+     * 对于 form 来说，需要判断查看页面还是编辑页面，用于展示本文 or 组件
+     * 对于 table 来说，用来设置某一 slot 列是否为组件
+     */
+    editable: { type: Boolean, default: true },
+    /**
+     * 初始状态，组件 or sk-label
+     * 只有在 table 中设置此属性才生效，因此默认为 true
+     */
+    editmode: { type: Boolean, default: true }
+  },
+  data () {
+    return {
+      isFocus: false
+    }
   },
   computed: {
     currentModel: {
@@ -36,17 +60,51 @@ export default {
     },
 
     currentOption () {
-      console.log(this.option)
       // 判断该组件是否为只读
-      if ((typeof (this.option.editable) === 'boolean') && !this.option.editable) {
-        return this.$utils.merge(this.option, { type: 'sk-label' })
-      } else {
+      if (this.currentEditMode) {
         return this.option
+      } else {
+        return this.$utils.merge(this.option, { type: 'sk-label' })
       }
     },
-
+    currentEditMode () {
+      if (this.editable) {
+        return this.editmode ? this.editmode : this.isFocus
+      } else {
+        return this.editable
+      }
+    },
+    isDepFocus () {
+      if (this.editable) {
+        if (this.editmode) return false
+        else return true
+      } else {
+        return false
+      }
+    },
     hasChildrenComponents () {
       return this.option.type === 'el-select'
+    }
+  },
+  watch: {
+    isFocus (val) {
+      if (val) {
+        this.$nextTick(_ => {
+          this.$refs.widget.focus()
+        })
+      }
+    }
+  },
+  methods: {
+    handleWidgetClick () {
+      if (this.isDepFocus) { this.isFocus = true }
+    },
+
+    handleClickoutside () {
+      if (this.isDepFocus && this.isFocus) {
+        if (this.hasChildrenComponents) return
+        this.$nextTick(_ => { this.isFocus = false })
+      }
     }
   }
 }

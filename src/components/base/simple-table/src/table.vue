@@ -9,6 +9,7 @@
       v-bind="tableAttrs"
       height="auto"
       @cell-dblclick="handleCellDblclick"
+      @cell-click="handleCellClick"
     >
       <simple-table-column
         v-for="(tableColumnItem, tableColumnIndex) in tableColumns"
@@ -56,6 +57,10 @@ export default {
     handleCellDblclick (row, column, cell, event) {
       this.$emit('cell-dblclick', row, column, cell, event)
       // this.bindEvents(cell)
+    },
+
+    handleCellClick (row, column, cell, event) {
+
     },
 
     bindEvents (dom) {
