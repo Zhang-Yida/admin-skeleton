@@ -21,14 +21,14 @@ export default {
       } else {
         if (columnAttrs.slotname) {
           return (
-            <el-table-column attrs={columnAttrs}>
+            <el-table-column props={columnAttrs}>
               {
                 this.slotList[columnAttrs.slotname]
               }
             </el-table-column>
           )
         } else {
-          return <el-table-column attrs={columnAttrs} />
+          return <el-table-column props={columnAttrs} />
         }
       }
     }

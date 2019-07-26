@@ -51,12 +51,8 @@ export default {
   },
   computed: {
     currentModel: {
-      set: function (data) {
-        this.$emit('update:model', data)
-      },
-      get: function () {
-        return this.model
-      }
+      set: function (data) { this.$emit('update:model', data) },
+      get: function () { return this.model }
     },
 
     currentOption () {
@@ -91,19 +87,33 @@ export default {
       if (val) {
         this.$nextTick(_ => {
           this.$refs.widget.focus()
+          this.$refs.widget.$el.addEventListener('paste', this.handlePaste, false)
         })
+      } else {
+        this.$refs.widget.$el.removeEventListener('paste', this.handlePaste, false)
       }
     }
   },
   methods: {
     handleWidgetClick () {
-      if (this.isDepFocus) { this.isFocus = true }
+      if (this.isDepFocus) {
+        this.isFocus = true
+      }
     },
 
     handleClickoutside () {
       if (this.isDepFocus && this.isFocus) {
-        if (this.hasChildrenComponents) return
-        this.$nextTick(_ => { this.isFocus = false })
+        // 失去焦点
+        setTimeout(() => {
+          this.isFocus = false
+        }, 0)
+      }
+    },
+
+    handlePaste (event) {
+      event.preventDefault()
+      if (this.isDepFocus && this.isFocus) {
+        this.$emit('paste', event)
       }
     }
   }

@@ -32,9 +32,51 @@ function merge (source, other) {
     Array.isArray(source) ? [] : {}
   )
 }
+
+function baseSlice (array, start, end) {
+  var index = -1
+  var length = array.length
+
+  if (start < 0) {
+    start = -start > length ? 0 : (length + start)
+  }
+  end = end > length ? length : end
+  if (end < 0) {
+    end += length
+  }
+  length = start > end ? 0 : ((end - start) >>> 0)
+  start >>>= 0
+
+  var result = Array(length)
+  while (++index < length) {
+    result[index] = array[index + start]
+  }
+  return result
+}
+
+function drop (array, n) {
+  var length = array ? array.length : 0
+  if (!length) {
+    return []
+  }
+  n = (n === undefined) ? 1 : n
+  return baseSlice(array, n < 0 ? 0 : n, length)
+}
+
+// 对于 excel 中 copy 出的数据进行 matrix 转换
+function matrix (str) {
+  let rowMatrix = str.split(/\r\n/ig)
+  if (rowMatrix.length === 0) return
+
+  let matrix = rowMatrix.map(item => item.split(/\t/ig))
+  return matrix
+}
+
 export default {
   isArray,
   isObject,
   bind,
-  merge
+  merge,
+  drop,
+  matrix
 }

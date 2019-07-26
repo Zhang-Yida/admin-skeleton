@@ -8,8 +8,6 @@
       :data="tableData"
       v-bind="tableAttrs"
       height="auto"
-      @cell-dblclick="handleCellDblclick"
-      @cell-click="handleCellClick"
     >
       <simple-table-column
         v-for="(tableColumnItem, tableColumnIndex) in tableColumns"
@@ -48,35 +46,7 @@ export default {
      */
     withPagination: { type: Boolean, default: true }
   },
-  computed: {
-    simpleTableWrapper () { return this.$refs.simpleTableWrapper }
-  },
-  mounted () {
-  },
-  methods: {
-    handleCellDblclick (row, column, cell, event) {
-      this.$emit('cell-dblclick', row, column, cell, event)
-      // this.bindEvents(cell)
-    },
-
-    handleCellClick (row, column, cell, event) {
-
-    },
-
-    bindEvents (dom) {
-      dom.addEventListener('paste', this.pasteData, { passive: false })
-    },
-    unbindEvents () {
-      this.simpleTableWrapper.removeEventListener('paste', this.pasteData, { passive: false })
-    },
-
-    pasteData (event) {
-      event.preventDefault()
-      // 用于兼容 IE
-      let clipboardData = event.clipboardData || window.clipboardData
-      console.log(clipboardData.getData('Text'))
-    }
-  }
+  methods: { }
 }
 </script>
 <style lang="less" scoped>
