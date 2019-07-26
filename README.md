@@ -47,6 +47,7 @@ https://segmentfault.com/a/1190000006110417
 ### **组件集成**
 - Element 组件库集成
 - Element Table 及 Form 组件二次封装
+- 可编辑表格，可粘贴表格
 ### **第三方组件组件**
 - 富文本编辑器
 - Markdown 编辑器
