@@ -16,7 +16,7 @@
     <template #hello="slotProps">
       <widget-item
         :model.sync="slotProps.row.hello"
-        :option="{ type: 'el-select', option: selectOption, component: { 'automatic-dropdown': true } }"
+        :option="{ type: 'el-select', option: selectOption, component: { automaticDropdown: true } }"
         :editable="true"
         :editmode="false"
         @paste="handleDataPaste(slotProps.$index, slotProps.column, $event)"
@@ -116,9 +116,13 @@ export default {
     }
   },
   methods: {
+    /**
+     * 粘贴操作
+     */
     handleDataPaste (rowIndex, column, event) {
-      let unFormatClipboardData = event.clipboardData.getData('Text')
-      let dataMatrix = this.$utils.matrix(unFormatClipboardData)
+      let clipboardData = event.clipboardData || window.clipboardData
+      let clipboardDataText = clipboardData.getData('Text')
+      let dataMatrix = this.$utils.matrix(clipboardDataText)
 
       let columnName = column.property
       // TODO: 需要去除 fixed 列

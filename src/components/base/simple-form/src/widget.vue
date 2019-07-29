@@ -9,6 +9,7 @@
       v-model="currentModel"
       class="sk-widget"
       v-bind="currentOption.component"
+      :option="currentOption.option"
       v-on="currentOption.event"
     >
       <template v-if="hasChildrenComponents">

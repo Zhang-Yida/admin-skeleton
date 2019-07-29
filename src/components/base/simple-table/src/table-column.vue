@@ -3,7 +3,7 @@ export default {
   name: 'SimpleTableColumn',
   props: {
     columnAttrs: { type: Object, required: true },
-    // 用于接受父组件提供的 slot 对象列表
+    // 用于接收父组件提供的 slot 对象列表
     slotList: { type: Object, default: () => { return {} } }
   },
   methods: {
