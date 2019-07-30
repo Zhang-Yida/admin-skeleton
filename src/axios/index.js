@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const instance = axios.create({
-  // baseURL: '',
+  baseURL: '',
   timeout: 50000
 })
 
@@ -48,7 +48,10 @@ instance.interceptors.request.use(config => {
 })
 
 instance.interceptors.response.use(resp => {
+  removeUnreactedRequest(resp.config)
+  let respData = resp.data
 
+  return respData
 }, error => {
   if (error.response) {
     let errResp = error.response

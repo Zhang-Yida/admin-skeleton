@@ -18,11 +18,12 @@ const router = new Router({
     },
     {
       path: '/',
-      // name: 'Home',
+      name: 'Home',
       component: Home,
+      redirect: { name: 'Dashboard' },
       children: [
         {
-          path: '',
+          path: 'dashboard',
           name: 'Dashboard',
           component: _ => import('@/views/dashboard')
         },

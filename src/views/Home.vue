@@ -23,9 +23,10 @@ export default {
       menuList: menuList
     }
   },
-  created () { },
-  mounted () {
-    // this.$axios.post('/', { name: 'zm' })
+  beforeRouteEnter (to, from, next) {
+    next({
+      name: 'Login'
+    })
   }
 }
 </script>

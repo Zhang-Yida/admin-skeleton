@@ -5,6 +5,8 @@ import store from './store/index'
 import axios from './axios'
 import utils from './utils'
 
+import './mock'
+
 /**
  * ElementUI 自定义主题
  */
@@ -28,7 +30,6 @@ Vue.use(axios)
 
 Vue.prototype.$utils = utils
 
-// window.utils = utils
 Vue.config.productionTip = false
 
 new Vue({
