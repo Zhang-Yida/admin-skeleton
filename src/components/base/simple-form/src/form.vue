@@ -2,15 +2,20 @@
   <el-form
     :model="model"
     v-bind="mergedFormLayout"
+    @submit.native.prevent
   >
     <el-row :gutter="6">
       <el-col
         v-for="(widget, index) in widgetList"
         :key="index"
-        :span="6"
+        :span="widget.span ? widget.span : widgetGrid"
       >
-        <el-form-item :label="widget.label">
+        <el-form-item v-bind="widget.formItem">
+          <template v-if="widget.slotname">
+            <slot :name="widget.slotname" />
+          </template>
           <widget-item
+            v-else
             :model.sync="model[widget.prop]"
             :option="widget"
           />
@@ -29,6 +34,10 @@ export default {
      */
     formLayout: { type: Object, default: () => {} },
     widgetList: { type: Array, required: true },
+    /**
+     * 设置表单一行显示多少组件
+     */
+    widgetGrid: { type: [Number, String], default: 6 },
     model: { type: Object, required: true }
   },
   computed: {

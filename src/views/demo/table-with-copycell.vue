@@ -4,6 +4,25 @@
     :table-data="tableData"
     :table-attrs="tableAttrs"
   >
+    <template>
+      <simple-form
+        :model="searchModel"
+        :widget-list="widgetList"
+        :form-layout="{ labelPosition: 'right', labelWidth: '60px' }"
+      >
+        <template #operation="slotProps">
+          <el-button
+            native-type="submit"
+            @click="handleDataSearch"
+          >
+            Search
+          </el-button>
+          <el-button type="primary">
+            Create
+          </el-button>
+        </template>
+      </simple-form>
+    </template>
     <template #name="slotProps">
       <widget-item
         :model.sync="slotProps.row.name"
@@ -30,6 +49,7 @@ export default {
   name: 'Table',
   data () {
     return {
+      searchModel: { },
 
       tableData: [
         {
@@ -64,6 +84,40 @@ export default {
         {
           value: 'advance',
           label: 'Adv Select'
+        }
+      ],
+
+      widgetList: [
+        {
+          prop: 'label',
+          type: 'el-input',
+          component: { clearable: true },
+          formItem: {
+            label: 'label'
+          }
+        },
+        {
+          prop: 'name',
+          type: 'el-input',
+          component: { clearable: true },
+          formItem: {
+            label: 'name'
+          }
+        },
+        {
+          prop: 'age',
+          type: 'el-input',
+          component: { clearable: true },
+          formItem: {
+            label: 'age'
+          }
+        },
+        {
+          span: 6,
+          slotname: 'operation',
+          formItem: {
+            labelWidth: '0px'
+          }
         }
       ]
     }
@@ -116,6 +170,9 @@ export default {
     }
   },
   methods: {
+    handleDataSearch () {
+      console.log(this.searchModel)
+    },
     /**
      * 粘贴操作
      */

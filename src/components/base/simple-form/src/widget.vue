@@ -32,10 +32,13 @@ export default {
   props: {
     // 用于渲染组件的组件属性
     option: { type: Object, required: true },
+    /**
+     * 组件数据双向绑定
+     */
     model: { type: [Array, String, Number, Object] },
     /**
      * 该组件是否为可编辑组件
-     * 对于 form 来说，需要判断查看页面还是编辑页面，用于展示本文 or 组件
+     * 对于 form 来说，需要判断查看页面还是编辑页面，用于展示本文（sk-label） or 组件
      * 对于 table 来说，用来设置某一 slot 列是否为组件
      */
     editable: { type: Boolean, default: true },
@@ -58,11 +61,7 @@ export default {
 
     currentOption () {
       // 判断该组件是否为只读
-      if (this.currentEditMode) {
-        return this.option
-      } else {
-        return this.$utils.merge(this.option, { type: 'sk-label' })
-      }
+      if (this.currentEditMode) { return this.option } else { return this.$utils.merge(this.option, { type: 'sk-label' }) }
     },
     currentEditMode () {
       if (this.editable) {
@@ -79,6 +78,7 @@ export default {
         return false
       }
     },
+    // 控件是否包含子组件
     hasChildrenComponents () {
       return this.option.type === 'el-select'
     }

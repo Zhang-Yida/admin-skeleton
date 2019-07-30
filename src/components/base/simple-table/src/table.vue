@@ -1,7 +1,8 @@
 <template>
   <div class="sk-table">
     <div class="sk-search">
-      Search Condition Placeholder
+      <!-- 用于查询条件展示区域 -->
+      <slot />
     </div>
     <el-table
       ref="simpleTableWrapper"
@@ -34,7 +35,8 @@ export default {
   props: {
     tableColumns: { type: Array, required: true },
     tableData: { type: Array, required: true },
-    tableAttrs: { type: Object,
+    tableAttrs: {
+      type: Object,
       default: () => {
         return {}
       }
@@ -46,11 +48,11 @@ export default {
      */
     withPagination: { type: Boolean, default: true }
   },
-  methods: { }
+  methods: {}
 }
 </script>
 <style lang="less" scoped>
-.sk-table{
+.sk-table {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -59,14 +61,13 @@ export default {
     margin-bottom: 10px;
   }
 
-  .el-table{
+  .el-table {
     flex: 1;
   }
 
-  .sk-pagination{
+  .sk-pagination {
     margin-top: 10px;
     text-align: right;
   }
 }
-
 </style>
