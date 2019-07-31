@@ -22,12 +22,12 @@ export default {
     return {
       menuList: menuList
     }
-  },
-  beforeRouteEnter (to, from, next) {
-    next({
-      name: 'Login'
-    })
   }
+  // beforeRouteEnter (to, from, next) {
+  //   next({
+  //     name: 'Login'
+  //   })
+  // }
 }
 </script>
 <style lang="less" scoped>

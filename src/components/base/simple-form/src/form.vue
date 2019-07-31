@@ -1,5 +1,6 @@
 <template>
   <el-form
+    ref="simpleForm"
     :model="model"
     v-bind="mergedFormLayout"
     @submit.native.prevent
@@ -10,7 +11,11 @@
         :key="index"
         :span="widget.span ? widget.span : widgetGrid"
       >
-        <el-form-item v-bind="widget.formItem">
+        <el-form-item
+          v-bind="widget.formItem"
+          :prop="widget.prop"
+          :rules="widget.validate"
+        >
           <template v-if="widget.slotname">
             <slot :name="widget.slotname" />
           </template>
@@ -48,6 +53,16 @@ export default {
   methods: {
     handleTest () {
 
+    },
+
+    /**
+     * 暴露给外部方法
+     */
+    resetFields () {
+      this.$refs.simpleForm.resetFields()
+    },
+    validate () {
+      return this.$refs.simpleForm.validate()
     }
   }
 }

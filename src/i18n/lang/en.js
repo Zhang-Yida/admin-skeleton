@@ -1,3 +1,6 @@
 export default {
-  message: 'en'
+  message: 'en',
+  framework: {
+
+  }
 }

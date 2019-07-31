@@ -75,5 +75,8 @@ http://mockjs.com/
 
 ### **axios 源码解析及应用**
 ### **lodash 常用方法源码解读及应用**
-
 ### **总结并集成常用的 js 方法**
+### **async/await 异步方法使用**
+```
+https://www.jianshu.com/p/ffa5cbe9ab29
+```

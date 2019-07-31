@@ -1,19 +1,28 @@
 <template>
   <div class="sk-login">
-    <el-form class="sk-login__form">
-      <el-form-item class="animated faster fadeInUp">
-        <el-input v-model="username" />
-      </el-form-item>
-      <el-form-item class="animated faster fadeInUp delay-dot2s">
-        <el-input v-model="password" />
-      </el-form-item>
-      <el-button
-        type="primary"
-        class="animated fadeInUp faster delay-dot4s"
-      >
-        Submit
-      </el-button>
-    </el-form>
+    <simple-form
+      ref="loginForm"
+      :model="formModel"
+      :widget-list="widgetList"
+      :widget-grid="24"
+      class="sk-login__form"
+    >
+      <template #title="slotProps">
+        <div class="sk-login__title">
+          Admin Skeleton
+        </div>
+      </template>
+      <template #operation="slotProps">
+        <el-button
+          type="primary"
+          size="small"
+          style="width: 100%;"
+          @click="handleUserLogin"
+        >
+          {{ $t('framework.login') }}
+        </el-button>
+      </template>
+    </simple-form>
   </div>
 </template>
 <script>
@@ -21,8 +30,62 @@ export default {
   name: 'Login',
   data () {
     return {
-      username: '',
-      password: ''
+      loading: false,
+      formModel: { username: '', password: '' },
+
+      widgetList: [
+        {
+          slotname: 'title',
+          formItem: {
+            labelWidth: '0px'
+          }
+        },
+        {
+          prop: 'username',
+          type: 'el-input',
+          component: {
+            clearable: true,
+            prefixIcon: 'iconfont icon-user',
+            size: 'small'
+          },
+          validate: { required: true, message: this.$t('validation.mustInput'), trigger: 'blur' }
+        },
+        {
+          prop: 'password',
+          type: 'el-input',
+          component: {
+            prefixIcon: 'iconfont icon-password',
+            size: 'small',
+            showPassword: true
+          },
+          validate: { required: true, message: this.$t('validation.mustInput'), trigger: 'blur' }
+        },
+        {
+          slotname: 'operation',
+          formItem: {
+            labelWidth: '0px'
+          }
+        }
+      ]
+    }
+  },
+  created () { },
+  methods: {
+    handleUserLogin () {
+      this.$refs.loginForm.validate()
+        .then(_ => {
+          this.loading = true
+          this.$axios
+            .post('/api/system/login', this.formModel)
+            .then(resp => {
+              this.$router.push('/')
+            })
+            .finally(_ => {
+              this.$refs.loginForm.resetFields()
+              this.loading = false
+            })
+        })
+        .catch(_ => {})
     }
   }
 }
@@ -34,8 +97,14 @@ export default {
   align-items: center;
   width: 100%;
   height: 100%;
+  &__title {
+    font-size: 20px;
+    // font-weight: bold;
+    text-align: center;
+    color: #333;
+  }
   &__form {
-    width: 350px;
+    width: 300px;
   }
 }
 </style>

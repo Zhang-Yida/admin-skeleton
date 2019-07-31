@@ -1,6 +1,10 @@
 export default [
   {
-    url: '/api/system/login'
+    url: '/api/system/login',
+    method: 'post',
+    response (config) {
+      console.log(config)
+    }
   },
   {
     url: '/api/system/getUserinfo',
