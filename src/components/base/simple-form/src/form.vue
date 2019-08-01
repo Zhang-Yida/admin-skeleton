@@ -51,10 +51,6 @@ export default {
     }
   },
   methods: {
-    handleTest () {
-
-    },
-
     /**
      * 暴露给外部方法
      */

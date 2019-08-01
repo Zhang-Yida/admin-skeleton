@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { Message } from 'element-ui'
 
 const instance = axios.create({
   baseURL: '',
@@ -42,6 +43,9 @@ instance.interceptors.request.use(config => {
     })
   })
 
+  if (localStorage.token) {} else {
+
+  }
   return config
 }, error => {
   console.log(error)
@@ -49,9 +53,14 @@ instance.interceptors.request.use(config => {
 
 instance.interceptors.response.use(resp => {
   removeUnreactedRequest(resp.config)
-  let respData = resp.data
+  let respdata = resp.data
 
-  return respData
+  if (respdata.code === 200 && respdata.message === 'ok') {
+    return respdata
+  } else {
+    Message.error(respdata.message)
+    return Promise.reject(respdata)
+  }
 }, error => {
   if (error.response) {
     let errResp = error.response

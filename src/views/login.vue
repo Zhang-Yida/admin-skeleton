@@ -78,10 +78,12 @@ export default {
           this.$axios
             .post('/api/system/login', this.formModel)
             .then(resp => {
+              let respdata = resp.data
+              localStorage.token = respdata.token
+              this.$refs.loginForm.resetFields()
               this.$router.push('/')
             })
             .finally(_ => {
-              this.$refs.loginForm.resetFields()
               this.loading = false
             })
         })

@@ -22,12 +22,15 @@ export default {
     return {
       menuList: menuList
     }
+  },
+  beforeRouteEnter (to, from, next) {
+    // next({
+    //   name: 'Login'
+    // })
+    console.log(`[home.vue beforeRouteEnter]`)
+
+    next()
   }
-  // beforeRouteEnter (to, from, next) {
-  //   next({
-  //     name: 'Login'
-  //   })
-  // }
 }
 </script>
 <style lang="less" scoped>
