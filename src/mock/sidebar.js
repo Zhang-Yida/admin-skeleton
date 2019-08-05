@@ -40,6 +40,10 @@ export default [
     ]
   },
   {
+    path: '/formmaker',
+    title: '表单设计器'
+  },
+  {
     path: '/1-1',
     title: '1-1',
     icon: 'icon-tree',

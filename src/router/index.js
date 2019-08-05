@@ -46,6 +46,11 @@ const router = new Router({
           path: 'form-select',
           name: 'FormSelect',
           component: _ => import('@/views/demo/form-select')
+        },
+        {
+          path: 'formmaker',
+          name: 'FormMaker',
+          component: _ => import('@/views/form-maker/main')
         }
       ]
     }

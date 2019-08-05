@@ -42,11 +42,13 @@ export default {
         },
         // 基础多选
         {
-          label: '基础多选',
           type: 'el-select',
           prop: 'baseMulSelect',
           component: {
             multiple: true
+          },
+          formItem: {
+            label: '基础多选'
           },
           option: optionList
         },
