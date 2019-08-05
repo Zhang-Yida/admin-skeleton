@@ -3,6 +3,7 @@
     <simple-form
       ref="loginForm"
       :model="formModel"
+      :form-layout="{ labelWidth: '0px' }"
       :widget-list="widgetList"
       :widget-grid="24"
       class="sk-login__form"
@@ -35,10 +36,7 @@ export default {
 
       widgetList: [
         {
-          slotname: 'title',
-          formItem: {
-            labelWidth: '0px'
-          }
+          slotname: 'title'
         },
         {
           prop: 'username',
@@ -61,10 +59,7 @@ export default {
           validate: { required: true, message: this.$t('validation.mustInput'), trigger: 'blur' }
         },
         {
-          slotname: 'operation',
-          formItem: {
-            labelWidth: '0px'
-          }
+          slotname: 'operation'
         }
       ]
     }
