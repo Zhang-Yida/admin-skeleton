@@ -23,7 +23,7 @@
         珊格布局
       </div>
       <draggable
-        :list="layoutWidgetList"
+        :list="gridWidgetList"
         :sort="false"
         :group="{ name: 'widget', pull: 'clone', put: false }"
       >
@@ -33,16 +33,18 @@
       </draggable>
     </div>
     <div class="drawer-wrapper">
-      <draggable
+      <!-- <draggable
         class="drawer-canvas"
         :group="{ name: 'widget' }"
         :list="formLayout"
-      >
-        <simple-form
-          :widget-list="formLayout"
-          :model="formModel"
-        />
-      </draggable>
+      > -->
+      <!-- Form 画板，根据拖拽出的 json 格式数据绘制表单设计器预览图 -->
+      <drawer
+        class="drawer-canvas"
+        :widget-list="formLayout"
+        :model="formModel"
+      />
+      <!-- </draggable> -->
     </div>
     <div class="prop-wrapper">
       {{ formLayout }}
@@ -53,13 +55,19 @@
 import draggable from 'vuedraggable'
 // 表单组件
 import formWidget from './options/widget/formWidget'
+// 栅格布局
+import gridWidget from './options/widget/gridWidget'
+
+// 画板组件
+import Drawer from './components/drawer'
 export default {
   name: 'FormMaker',
-  components: { draggable },
+  components: { draggable, Drawer },
   data () {
     return {
       formWidgetList: formWidget,
-      layoutWidgetList: [{ type: 'Layout', label: 'Layout' }],
+      gridWidgetList: gridWidget,
+
       formLayout: [],
       formModel: {}
     }
@@ -124,7 +132,7 @@ export default {
 
     .sortable-ghost {
       display: inline-block;
-      width: 25%;
+      width: 100%;
       height: 40px;
       border: 1px dotted red;
     }
