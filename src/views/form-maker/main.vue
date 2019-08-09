@@ -26,6 +26,7 @@
         :list="gridWidgetList"
         :sort="false"
         :group="{ name: 'widget', pull: 'clone', put: false }"
+        :clone="handleCloneToLayout"
       >
         <div class="widget-item">
           <span>珊格布局</span>
@@ -70,6 +71,9 @@ export default {
     handleCloneToLayout (val) {
       // val 为拖拽源的数据引用，需进行复制
       let cloneWidgetOption = JSON.parse(JSON.stringify(val))
+
+      if (cloneWidgetOption.type === 'grid') return cloneWidgetOption
+
       cloneWidgetOption.prop = `${cloneWidgetOption.label}_${parseInt(Math.random() * 10000)}`
       // 为复制出的组件配置添加 formItem、prop 等属性
       cloneWidgetOption.formItem = { label: cloneWidgetOption.label }

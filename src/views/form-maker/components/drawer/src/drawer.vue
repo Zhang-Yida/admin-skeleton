@@ -23,7 +23,27 @@
               :key="widgetChildIndex"
               :span="widgetChild.span"
             >
-              <div class="widget-form-item" />
+              <div class="widget-form-item">
+                <!-- 设置某个栅格布局中的一格中只包含一个组件 -->
+                <draggable
+                  :group="{ name: 'widget', put: widgetChild.widget.length === 0, pull: true }"
+                  style="height: 100%;"
+                  :list="widgetChild.widget"
+                  @add="handleGridWidgetAdd(widgetIndex, widgetChildIndex, $event)"
+                >
+                  <el-form-item
+                    v-for="(widgetCell, widgetCellIndex) in widgetChild.widget"
+                    :key="widgetCellIndex"
+                    v-bind="widgetCell.formItem"
+                    :prop="widgetCell.prop"
+                  >
+                    <widget-item
+                      :model.sync="model[widgetCell.prop]"
+                      :option="widgetCell"
+                    />
+                  </el-form-item>
+                </draggable>
+              </div>
             </el-col>
           </el-row>
         </template>
@@ -63,14 +83,22 @@ export default {
     widgetGrid: { type: [Number, String], default: 6 },
     model: { type: Object, required: true }
   },
+  data () {
+    return {
+      /**
+       * 缓存被拖入 Grid 布局中的表单 JSON 对象
+       */
+      cacheWidgetList: []
+    }
+  },
   computed: {
     mergedFormLayout () {
       return this.$utils.merge(baseFormLayout, this.formLayout)
     }
   },
   methods: {
-    handleGridWidgetAdd (widgetChild) {
-      console.log(arguments)
+    handleGridWidgetAdd (targetWidgetIndex, targetGridCellIndex, event) {
+      console.log(targetWidgetIndex, targetGridCellIndex, this.cacheWidgetList)
     }
   }
 }
@@ -85,7 +113,7 @@ export default {
   }
 
   .widget-form-item {
-    height: 40px;
+    height: 50px;
     margin: 3px 0;
     border: 1px dashed #409eff;
   }
