@@ -1,7 +1,6 @@
 <template>
   <el-form
     ref="simpleForm"
-    class="drawer-wrapper"
     :model="model"
     v-bind="mergedFormLayout"
     @submit.native.prevent
@@ -14,27 +13,17 @@
       <div
         v-for="(widget, widgetIndex) in widgetList"
         :key="widgetIndex"
-
         class="widget-container"
       >
         <!-- 判断是否为栅格布局 widget -->
         <template v-if="widget.type === 'grid'">
-          <!--  -->
-          <el-row
-            :gutter="20"
-            type="flex"
-          >
+          <el-row :gutter="20">
             <el-col
-              v-for="i in 4"
-              :key="i"
-              :span="6"
+              v-for="(widgetChild, widgetChildIndex) in widget.children"
+              :key="widgetChildIndex"
+              :span="widgetChild.span"
             >
-              <!-- <draggable
-                :group="{ name: 'widget', pull: false }"
-                :sort="false"
-              > -->
-              <div class="widget-gridcell" />
-              <!-- </draggable> -->
+              <div class="widget-form-item" />
             </el-col>
           </el-row>
         </template>
@@ -52,29 +41,6 @@
           />
         </el-form-item>
       </div>
-      <!-- <el-row :gutter="6">
-        <el-col
-          v-for="(widget, index) in widgetList"
-          :key="index"
-          :span="widget.span ? widget.span : widgetGrid"
-        >
-          <el-form-item
-            v-bind="widget.formItem"
-            :prop="widget.prop"
-            :rules="widget.validate"
-            class="widget-formitem"
-          >
-            <template v-if="widget.slotname">
-              <slot :name="widget.slotname" />
-            </template>
-            <widget-item
-              v-else
-              :model.sync="model[widget.prop]"
-              :option="widget"
-            />
-          </el-form-item>
-        </el-col>
-      </el-row> -->
     </draggable>
   </el-form>
 </template>
@@ -103,45 +69,25 @@ export default {
     }
   },
   methods: {
-    /**
-     * 暴露给外部方法
-     */
-    resetFields () {
-      this.$refs.simpleForm.resetFields()
-    },
-    validate () {
-      return this.$refs.simpleForm.validate()
+    handleGridWidgetAdd (widgetChild) {
+      console.log(arguments)
     }
   }
 }
 </script>
 <style lang="less" scoped>
-.drawer-wrapper {
-  .widget-container {
-    border: 1px dashed ;
-    margin-bottom: 4px;
+.widget-container {
+  border: 1px dashed;
+  margin-bottom: 4px;
 
-      &:hover {
-        border: 1px solid #409eff;
-      }
-    // .widget-cell {
-    //   &:hover {
-    //     border: 1px solid #409eff;
-    //   }
-    // }
+  &:hover {
+    border: 1px solid #409eff;
+  }
 
-    .el-row {
-      height: 47px;
-
-      .el-col {
-        height: 100%;
-
-        .widget-gridcell {
-          height: 40px;
-          border: 1px dashed;
-        }
-      }
-    }
+  .widget-form-item {
+    height: 40px;
+    margin: 3px 0;
+    border: 1px dashed #409eff;
   }
 }
 </style>

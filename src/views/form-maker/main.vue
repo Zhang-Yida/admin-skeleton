@@ -33,18 +33,12 @@
       </draggable>
     </div>
     <div class="drawer-wrapper">
-      <!-- <draggable
-        class="drawer-canvas"
-        :group="{ name: 'widget' }"
-        :list="formLayout"
-      > -->
       <!-- Form 画板，根据拖拽出的 json 格式数据绘制表单设计器预览图 -->
       <drawer
         class="drawer-canvas"
         :widget-list="formLayout"
         :model="formModel"
       />
-      <!-- </draggable> -->
     </div>
     <div class="prop-wrapper">
       {{ formLayout }}
@@ -76,9 +70,10 @@ export default {
     handleCloneToLayout (val) {
       // val 为拖拽源的数据引用，需进行复制
       let cloneWidgetOption = JSON.parse(JSON.stringify(val))
+      cloneWidgetOption.prop = `${cloneWidgetOption.label}_${parseInt(Math.random() * 10000)}`
       // 为复制出的组件配置添加 formItem、prop 等属性
       cloneWidgetOption.formItem = { label: cloneWidgetOption.label }
-      cloneWidgetOption.prop = `${cloneWidgetOption.label}_${parseInt(Math.random() * 10000)}`
+      delete cloneWidgetOption.label
       return cloneWidgetOption
     }
   }
@@ -95,7 +90,7 @@ export default {
     width: 250px;
     padding-right: 10px;
 
-    &__title{
+    &__title {
       font-size: 14px;
       margin-left: 5px;
       font-weight: 700;
@@ -130,11 +125,17 @@ export default {
       height: 100%;
     }
 
-    .sortable-ghost {
-      display: inline-block;
+    /deep/ .sortable-ghost {
+      // display: inline-block;
       width: 100%;
-      height: 40px;
-      border: 1px dotted red;
+      height: 0px;
+      // height: 40px;
+      border: 2px solid #f56c6c !important;
+margin-bottom: 4px;
+      // 隐藏被拖动的组件
+      * {
+        display: none;
+      }
     }
   }
 
