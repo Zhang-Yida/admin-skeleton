@@ -122,6 +122,7 @@ export default {
   }
 
   .drawer-wrapper {
+    padding: 10px;
     flex: 1;
     background: #eee;
 
@@ -132,7 +133,7 @@ export default {
     /deep/ .sortable-ghost {
       // display: inline-block;
       width: 100%;
-      height: 0px;
+      height: 0 !important;
       // height: 40px;
       border: 2px solid #f56c6c !important;
 margin-bottom: 4px;
