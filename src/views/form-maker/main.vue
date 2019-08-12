@@ -39,10 +39,13 @@
         class="drawer-canvas"
         :widget-list="formLayout"
         :model="formModel"
+
+        @selection-change="handleSelectionChange"
       />
     </div>
     <div class="prop-wrapper">
-      {{ formLayout }}
+      <!-- {{ formLayout }} -->
+      <prop-panel :widget-config="selectedWidget" />
     </div>
   </div>
 </template>
@@ -52,19 +55,22 @@ import draggable from 'vuedraggable'
 import formWidget from './options/widget/formWidget'
 // 栅格布局
 import gridWidget from './options/widget/gridWidget'
-
+// 组件属性面板
+import PropPanel from './components/prop-panel'
 // 画板组件
 import Drawer from './components/drawer'
 export default {
   name: 'FormMaker',
-  components: { draggable, Drawer },
+  components: { draggable, Drawer, PropPanel },
   data () {
     return {
       formWidgetList: formWidget,
       gridWidgetList: gridWidget,
 
       formLayout: [],
-      formModel: {}
+      formModel: {},
+
+      selectedWidget: {}
     }
   },
   methods: {
@@ -74,11 +80,19 @@ export default {
 
       if (cloneWidgetOption.type === 'grid') return cloneWidgetOption
 
-      cloneWidgetOption.prop = `${cloneWidgetOption.label}_${parseInt(Math.random() * 10000)}`
+      cloneWidgetOption.prop = `${cloneWidgetOption.label}_${parseInt(
+        Math.random() * 10000
+      )}`
       // 为复制出的组件配置添加 formItem、prop 等属性
       cloneWidgetOption.formItem = { label: cloneWidgetOption.label }
       delete cloneWidgetOption.label
       return cloneWidgetOption
+    },
+
+    /** 获取选中的 widget  */
+    handleSelectionChange (selectedWidget) {
+      console.log(selectedWidget)
+      this.selectedWidget = selectedWidget
     }
   }
 }
@@ -125,6 +139,7 @@ export default {
     padding: 10px;
     flex: 1;
     background: #eee;
+    overflow: auto;
 
     .drawer-canvas {
       height: 100%;
@@ -136,7 +151,7 @@ export default {
       height: 0 !important;
       // height: 40px;
       border: 2px solid #f56c6c !important;
-margin-bottom: 4px;
+      margin-bottom: 4px;
       // 隐藏被拖动的组件
       * {
         display: none;
@@ -145,7 +160,8 @@ margin-bottom: 4px;
   }
 
   .prop-wrapper {
-    width: 200px;
+    width: 300px;
+    overflow: auto;
     background: gainsboro;
   }
 }

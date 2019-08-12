@@ -19,7 +19,7 @@
       >
         <!-- 判断是否为栅格布局 widget -->
         <template v-if="widget.type === 'grid'">
-          <el-row :gutter="20">
+          <el-row :gutter="widget.gutter">
             <el-col
               v-for="(widgetChild, widgetChildIndex) in widget.children"
               :key="widgetChildIndex"
@@ -133,7 +133,11 @@ export default {
       }
       this.$set(activedWidget, '__isActived', true)
       this.activedWidget = activedWidget
+
+      /** 将选中的 widget 传递给父组件 */
+      this.$emit('selection-change', activedWidget)
     }
+
   }
 }
 </script>
