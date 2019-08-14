@@ -1,7 +1,8 @@
 const formWidget = [
   {
     label: 'Input',
-    type: 'el-input'
+    type: 'el-input',
+    component: {}
   },
   {
     label: 'Select',

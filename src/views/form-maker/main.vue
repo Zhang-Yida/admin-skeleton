@@ -162,7 +162,7 @@ export default {
   .prop-wrapper {
     width: 300px;
     overflow: auto;
-    background: gainsboro;
+    padding: 0 10px;
   }
 }
 </style>
