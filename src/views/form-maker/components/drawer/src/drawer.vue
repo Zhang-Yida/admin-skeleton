@@ -17,6 +17,16 @@
         :class="{ 'widget-active': widget.__isActived }"
         @click="handleWidgetCellClick(widget)"
       >
+        <div class="widget-active--operation">
+          <i
+            class="el-icon-copy-document"
+            @click.stop="handleWidgetCopy(widget, widgetIndex)"
+          />
+          <i
+            class="el-icon-delete"
+            @click.stop="handleWidgetDelete(widgetList, widget, widgetIndex)"
+          />
+        </div>
         <!-- 判断是否为栅格布局 widget -->
         <template v-if="widget.type === 'grid'">
           <el-row :gutter="widget.gutter">
@@ -35,7 +45,6 @@
                   class="widget-grid-cell"
                   :class="{ 'without-border': widgetChild.widget.length > 0 }"
                   :list="widgetChild.widget"
-                  @add="handleGridWidgetAdd(widgetIndex, widgetChildIndex, $event)"
                 >
                   <div
                     v-for="(widgetCell, widgetCellIndex) in widgetChild.widget"
@@ -43,6 +52,12 @@
                     class="cell"
                     :class="{ 'widget-active': widgetCell.__isActived }"
                   >
+                    <div class="widget-active--operation">
+                      <i
+                        class="el-icon-delete"
+                        @click.stop="handleWidgetDelete(widgetChild.widget, widgetCell, widgetCellIndex)"
+                      />
+                    </div>
                     <el-form-item
                       v-bind="widgetCell.formItem"
                       :prop="widgetCell.prop"
@@ -105,10 +120,6 @@ export default {
     }
   },
   methods: {
-    handleGridWidgetAdd (targetWidgetIndex, targetGridCellIndex, event) {
-      // console.log(targetWidgetIndex, targetGridCellIndex)
-    },
-
     /**
      * 点击某个 widget，获取到被点击组件的属性
      */
@@ -136,17 +147,88 @@ export default {
 
       /** 将选中的 widget 传递给父组件 */
       this.$emit('selection-change', activedWidget)
-    }
+    },
 
+    /**
+     * 复制 widget
+     * 需要将 widget 的 prop 属性重新赋值，防止对象重复引用
+     */
+    handleWidgetCopy (widget, widgetIndex) {
+      let copyWidget = JSON.parse(JSON.stringify(widget))
+      console.log(copyWidget)
+
+      // 处理 prop
+      if (copyWidget.type === 'grid') {
+      } else {
+        copyWidget.prop = `${copyWidget.type.replace(
+          /(el-)|(-)/gi,
+          ''
+        )}_${parseInt(Math.random() * 10000)}`
+      }
+
+      // 删除被选中组件的活动状态
+      delete widget.__isActived
+      this.$nextTick(_ => {
+        // 设置当前活动组件
+        this.activedWidget = copyWidget
+        this.$emit('selection-change', copyWidget)
+        this.widgetList.splice(widgetIndex + 1, 0, copyWidget)
+      })
+    },
+
+    /**
+     * 移除组件画板中某个组件
+     */
+    handleWidgetDelete (widgetList, widget, widgetIndex) {
+      // TODO:对于 grid，删除选中的组件，活动焦点移动至前一个 col 中的组件上，如果没有，则移动至后一个 col 中的组件上，如果都没有，在外层组件中同理
+      if (widgetIndex > 0) {
+        let currentWidget = widgetList[widgetIndex - 1]
+        currentWidget.__isActived = true
+        this.activedWidget = currentWidget
+        this.$emit('selection-change', currentWidget)
+      } else if (widgetIndex === 0) {
+        if (widgetList[widgetIndex + 1]) {
+          let currentWidget = widgetList[widgetIndex + 1]
+          currentWidget.__isActived = true
+          this.activedWidget = currentWidget
+          this.$emit('selection-change', currentWidget)
+        }
+      }
+      widgetList.splice(widgetIndex, 1)
+    }
   }
 }
 </script>
 <style lang="less" scoped>
 .widget-container {
+  position: relative;
   border: 1px dashed;
   margin-bottom: 4px;
   &.widget-active {
-    border: 2px solid #67c23a !important;
+    border: 2px solid #409eff !important;
+
+    > .widget-active--operation {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      right: 0;
+      bottom: 0;
+      width: 40px;
+      height: 20px;
+      background: #409eff;
+      z-index: 999;
+
+      i {
+        font-size: 14px;
+        color: white;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .widget-active--operation {
+    display: none;
   }
 
   &:hover {
@@ -180,7 +262,26 @@ export default {
         border-color: #409eff;
       }
       &.widget-active {
-        border: 2px solid #67c23a !important;
+        border: 2px solid #409eff !important;
+
+        .widget-active--operation {
+          position: absolute;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          right: 0;
+          bottom: 0;
+          width: 20px;
+          height: 20px;
+          background: #409eff;
+          z-index: 999;
+
+          i {
+            font-size: 14px;
+            color: white;
+            cursor: pointer;
+          }
+        }
       }
     }
 

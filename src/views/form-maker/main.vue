@@ -80,7 +80,7 @@ export default {
 
       if (cloneWidgetOption.type === 'grid') return cloneWidgetOption
 
-      cloneWidgetOption.prop = `${cloneWidgetOption.label}_${parseInt(
+      cloneWidgetOption.prop = `${cloneWidgetOption.type.replace(/(el-)|(-)/ig, '')}_${parseInt(
         Math.random() * 10000
       )}`
       // 为复制出的组件配置添加 formItem、prop 等属性
@@ -91,7 +91,7 @@ export default {
 
     /** 获取选中的 widget  */
     handleSelectionChange (selectedWidget) {
-      console.log(selectedWidget)
+      // console.log(selectedWidget)
       this.selectedWidget = selectedWidget
     }
   }
