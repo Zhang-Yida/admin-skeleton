@@ -159,6 +159,16 @@ export default {
 
       // 处理 prop
       if (copyWidget.type === 'grid') {
+        copyWidget.children.forEach(gridCell => {
+          let innerWidget = gridCell.widget[0]
+
+          if (innerWidget) {
+            innerWidget.prop = `${innerWidget.type.replace(
+              /(el-)|(-)/gi,
+              ''
+            )}_${parseInt(Math.random() * 10000)}`
+          }
+        })
       } else {
         copyWidget.prop = `${copyWidget.type.replace(
           /(el-)|(-)/gi,
