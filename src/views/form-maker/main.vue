@@ -26,6 +26,7 @@
         :list="gridWidgetList"
         :sort="false"
         :group="{ name: 'widget', pull: 'clone', put: false }"
+        :clone="handleCloneToLayout"
       >
         <div class="widget-item">
           <span>珊格布局</span>
@@ -33,21 +34,18 @@
       </draggable>
     </div>
     <div class="drawer-wrapper">
-      <!-- <draggable
-        class="drawer-canvas"
-        :group="{ name: 'widget' }"
-        :list="formLayout"
-      > -->
       <!-- Form 画板，根据拖拽出的 json 格式数据绘制表单设计器预览图 -->
       <drawer
         class="drawer-canvas"
         :widget-list="formLayout"
         :model="formModel"
+
+        @selection-change="handleSelectionChange"
       />
-      <!-- </draggable> -->
     </div>
     <div class="prop-wrapper">
-      {{ formLayout }}
+      <!-- {{ formLayout }} -->
+      <prop-panel :widget-config="selectedWidget" />
     </div>
   </div>
 </template>
@@ -57,29 +55,44 @@ import draggable from 'vuedraggable'
 import formWidget from './options/widget/formWidget'
 // 栅格布局
 import gridWidget from './options/widget/gridWidget'
-
+// 组件属性面板
+import PropPanel from './components/prop-panel'
 // 画板组件
 import Drawer from './components/drawer'
 export default {
   name: 'FormMaker',
-  components: { draggable, Drawer },
+  components: { draggable, Drawer, PropPanel },
   data () {
     return {
       formWidgetList: formWidget,
       gridWidgetList: gridWidget,
 
       formLayout: [],
-      formModel: {}
+      formModel: {},
+
+      selectedWidget: {}
     }
   },
   methods: {
     handleCloneToLayout (val) {
       // val 为拖拽源的数据引用，需进行复制
       let cloneWidgetOption = JSON.parse(JSON.stringify(val))
+
+      if (cloneWidgetOption.type === 'grid') return cloneWidgetOption
+
+      cloneWidgetOption.prop = `${cloneWidgetOption.type.replace(/(el-)|(-)/ig, '')}_${parseInt(
+        Math.random() * 10000
+      )}`
       // 为复制出的组件配置添加 formItem、prop 等属性
       cloneWidgetOption.formItem = { label: cloneWidgetOption.label }
-      cloneWidgetOption.prop = `${cloneWidgetOption.label}_${parseInt(Math.random() * 10000)}`
+      delete cloneWidgetOption.label
       return cloneWidgetOption
+    },
+
+    /** 获取选中的 widget  */
+    handleSelectionChange (selectedWidget) {
+      // console.log(selectedWidget)
+      this.selectedWidget = selectedWidget
     }
   }
 }
@@ -95,7 +108,7 @@ export default {
     width: 250px;
     padding-right: 10px;
 
-    &__title{
+    &__title {
       font-size: 14px;
       margin-left: 5px;
       font-weight: 700;
@@ -123,24 +136,33 @@ export default {
   }
 
   .drawer-wrapper {
+    padding: 10px;
     flex: 1;
     background: #eee;
+    overflow: auto;
 
     .drawer-canvas {
       height: 100%;
     }
 
-    .sortable-ghost {
-      display: inline-block;
+    /deep/ .sortable-ghost {
+      // display: inline-block;
       width: 100%;
-      height: 40px;
-      border: 1px dotted red;
+      height: 0 !important;
+      // height: 40px;
+      border: 2px solid #f56c6c !important;
+      margin-bottom: 4px;
+      // 隐藏被拖动的组件
+      * {
+        display: none;
+      }
     }
   }
 
   .prop-wrapper {
-    width: 200px;
-    background: gainsboro;
+    width: 300px;
+    overflow: auto;
+    padding: 0 10px;
   }
 }
 </style>

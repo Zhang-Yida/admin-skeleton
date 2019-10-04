@@ -1,0 +1,2 @@
+# 由于项目中使用了自定义主题模式，提交了 theme 文件，因此需忽略
+*.css linguist-language=Vue 
