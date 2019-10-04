@@ -20,23 +20,38 @@
         <!-- 判断是否为栅格布局 widget -->
         <template v-if="widget.type === 'grid'">
           <!--  -->
-          <el-row
-            :gutter="20"
-            type="flex"
+
+          <draggable
+            :group="{ name: 'widget', pull: false, put: false }"
+            :sort="false"
+            tag="el-row"
+            :list="widget.children"
+            style="height: 100%"
           >
             <el-col
-              v-for="i in 4"
-              :key="i"
+              v-for="(childWidget, childWidgetIndex) in widget.children"
+              :key="childWidgetIndex"
               :span="6"
             >
-              <!-- <draggable
-                :group="{ name: 'widget', pull: false }"
+              <draggable
+                :group="{ name: 'widget', pull: false, put: false }"
                 :sort="false"
-              > -->
-              <div class="widget-gridcell" />
-              <!-- </draggable> -->
+              >
+                <div class="widget-gridcell">
+                  <el-form-item
+                    v-bind="childWidget.formItem"
+                    :prop="childWidget.prop"
+                    :rules="childWidget.validate"
+                  >
+                    <widget-item
+                      :model.sync="model[childWidget.prop]"
+                      :option="childWidget"
+                    />
+                  </el-form-item>
+                </div>
+              </draggable>
             </el-col>
-          </el-row>
+          </draggable>
         </template>
         <!-- 普通组件 -->
         <el-form-item
@@ -52,29 +67,6 @@
           />
         </el-form-item>
       </div>
-      <!-- <el-row :gutter="6">
-        <el-col
-          v-for="(widget, index) in widgetList"
-          :key="index"
-          :span="widget.span ? widget.span : widgetGrid"
-        >
-          <el-form-item
-            v-bind="widget.formItem"
-            :prop="widget.prop"
-            :rules="widget.validate"
-            class="widget-formitem"
-          >
-            <template v-if="widget.slotname">
-              <slot :name="widget.slotname" />
-            </template>
-            <widget-item
-              v-else
-              :model.sync="model[widget.prop]"
-              :option="widget"
-            />
-          </el-form-item>
-        </el-col>
-      </el-row> -->
     </draggable>
   </el-form>
 </template>

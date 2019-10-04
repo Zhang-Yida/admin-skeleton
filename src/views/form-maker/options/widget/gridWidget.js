@@ -1,6 +1,7 @@
 const gridWidget = [
   {
-    type: 'grid'
+    type: 'grid',
+    children: [{}, {}]
   }
 ]
 
