@@ -1,5 +1,5 @@
 <template>
-  <simple-table
+  <sk-table
     :table-columns="tableColumns"
     :table-data="tableData"
     :table-attrs="tableAttrs"
@@ -20,7 +20,7 @@
         {{ scope.row.label }}
       </el-link>
     </template>
-  </simple-table>
+  </sk-table>
 </template>
 <script>
 export default {

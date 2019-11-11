@@ -46,7 +46,11 @@ export default {
             prefixIcon: 'iconfont icon-user',
             size: 'small'
           },
-          validate: { required: true, message: this.$t('validation.mustInput'), trigger: 'blur' }
+          validate: {
+            required: true,
+            message: this.$t('validation.mustInput'),
+            trigger: 'blur'
+          }
         },
         {
           prop: 'password',
@@ -56,7 +60,11 @@ export default {
             size: 'small',
             showPassword: true
           },
-          validate: { required: true, message: this.$t('validation.mustInput'), trigger: 'blur' }
+          validate: {
+            required: true,
+            message: this.$t('validation.mustInput'),
+            trigger: 'blur'
+          }
         },
         {
           slotname: 'operation'
@@ -64,10 +72,11 @@ export default {
       ]
     }
   },
-  created () { },
+  created () {},
   methods: {
     handleUserLogin () {
-      this.$refs.loginForm.validate()
+      this.$refs.loginForm
+        .validate()
         .then(_ => {
           this.loading = true
           this.$axios
@@ -88,7 +97,7 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.sk-login{
+.sk-login {
   display: flex;
   justify-content: center;
   align-items: center;

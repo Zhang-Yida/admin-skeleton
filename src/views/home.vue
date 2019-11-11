@@ -70,9 +70,6 @@ export default {
         cursor: pointer;
       }
     }
-
-    &__profile {
-    }
   }
 }
 </style>

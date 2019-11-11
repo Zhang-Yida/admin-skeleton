@@ -1,5 +1,5 @@
 <template>
-  <simple-form
+  <sk-form
     :model="model"
     :widget-list="widgetList"
   />
@@ -35,6 +35,10 @@ export default {
           label: 'normal',
           type: 'el-select',
           prop: 'baseSelect',
+          formItem: {
+            label: '基础',
+            labelWidth: '120px'
+          },
           component: {
             clearable: true
           },
@@ -48,7 +52,8 @@ export default {
             multiple: true
           },
           formItem: {
-            label: '基础多选'
+            label: '基础多选',
+            labelWidth: '50px'
           },
           option: optionList
         },

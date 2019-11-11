@@ -1,6 +1,6 @@
 <template>
   <el-form
-    ref="simpleForm"
+    ref="skForm"
     :model="model"
     v-bind="mergedFormLayout"
     @submit.native.prevent
@@ -15,6 +15,7 @@
           v-bind="widget.formItem"
           :prop="widget.prop"
           :rules="widget.validate"
+          class="sk-form-item"
         >
           <template v-if="widget.slotname">
             <slot :name="widget.slotname" />
@@ -32,7 +33,7 @@
 <script>
 import { baseFormLayout } from '@/components/base/defaults'
 export default {
-  name: 'SimpleForm',
+  name: 'SkForm',
   props: {
     /**
      * 设置 form 显示布局及基础属性
@@ -55,14 +56,20 @@ export default {
      * 暴露给外部方法
      */
     resetFields () {
-      this.$refs.simpleForm.resetFields()
+      this.$refs.skForm.resetFields()
     },
     validate () {
-      return this.$refs.simpleForm.validate()
+      return this.$refs.skForm.validate()
     }
   }
 }
 </script>
 <style lang="less" scoped>
-
+.sk-form-item {
+  /deep/ .el-form-item__label {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <simple-form
+  <sk-form
     :widget-list="widgetList"
     :model="model"
   />

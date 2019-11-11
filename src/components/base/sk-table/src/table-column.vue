@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'SimpleTableColumn',
+  name: 'SkTableColumn',
   props: {
     columnAttrs: { type: Object, required: true },
     // 用于接收父组件提供的 slot 对象列表

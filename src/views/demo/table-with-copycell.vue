@@ -1,11 +1,11 @@
 <template>
-  <simple-table
+  <sk-table
     :table-columns="tableColumns"
     :table-data="tableData"
     :table-attrs="tableAttrs"
   >
     <template>
-      <simple-form
+      <sk-form
         :model="searchModel"
         :widget-list="widgetList"
         :form-layout="{ labelPosition: 'right', labelWidth: '60px' }"
@@ -21,7 +21,7 @@
             Create
           </el-button>
         </template>
-      </simple-form>
+      </sk-form>
     </template>
     <template #name="slotProps">
       <widget-item
@@ -41,7 +41,7 @@
         @paste="handleDataPaste(slotProps.$index, slotProps.column, $event)"
       />
     </template>
-  </simple-table>
+  </sk-table>
 </template>
 <script>
 

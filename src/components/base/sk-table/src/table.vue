@@ -10,7 +10,7 @@
       v-bind="tableAttrs"
       height="auto"
     >
-      <simple-table-column
+      <sk-table-column
         v-for="(tableColumnItem, tableColumnIndex) in tableColumns"
         :key="tableColumnIndex"
         :column-attrs="tableColumnItem"
@@ -31,7 +31,7 @@
 </template>
 <script>
 export default {
-  name: 'SimpleTable',
+  name: 'SkTable',
   props: {
     tableColumns: { type: Array, required: true },
     tableData: { type: Array, required: true },
